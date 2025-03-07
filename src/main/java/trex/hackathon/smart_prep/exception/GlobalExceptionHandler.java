@@ -21,6 +21,34 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(errors);
 	}
 
+	@ExceptionHandler(QuestionBankAlreadyExistsException.class)
+	public ResponseEntity<Map<String, String>> handleQuestionBankAlreadyExistsException(QuestionBankAlreadyExistsException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put("error", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(errors);
+	}
+
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<Map<String, String>> handleUserNotFoundException(UserNotFoundException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put("error", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+	}
+
+	@ExceptionHandler(QuestionBankNotFoundException.class)
+	public ResponseEntity<Map<String, String>> handleQuestionBankNotFoundException(QuestionBankNotFoundException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put("error", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+	}
+
+	@ExceptionHandler(UnauthorizedAccessException.class)
+	public ResponseEntity<Map<String, String>> handleUnauthorizedAccessException(UnauthorizedAccessException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put("error", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errors);
+	}
+
 	@ExceptionHandler(BadCredentialsException.class)
 	public ResponseEntity<Map<String, String>> handleBadCredentialsException() {
 		Map<String, String> errors = new HashMap<>();
