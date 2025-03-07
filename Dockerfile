@@ -10,7 +10,7 @@ RUN ./mvnw clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-# Copy the .env file into the container
-#COPY .env .env
 EXPOSE 8080
-ENTRYPOINT ["/bin/sh", "-c", ". .env && java -jar app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
+#COPY .env .env
+# ENTRYPOINT ["/bin/sh", "-c", ". .env && java -jar app.jar"] 
