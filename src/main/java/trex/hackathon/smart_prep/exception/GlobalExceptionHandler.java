@@ -42,6 +42,13 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
 	}
 
+	@ExceptionHandler(QuestionPaperNotFoundException.class)
+	public ResponseEntity<Map<String, String>> handleQuestionPaperNotFoundException(QuestionPaperNotFoundException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put("error", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+	}
+
 	@ExceptionHandler(UnauthorizedAccessException.class)
 	public ResponseEntity<Map<String, String>> handleUnauthorizedAccessException(UnauthorizedAccessException ex) {
 		Map<String, String> errors = new HashMap<>();
