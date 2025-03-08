@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import trex.hackathon.smart_prep.dto.request.LoginRequest;
 import trex.hackathon.smart_prep.dto.request.RegisterRequest;
 import trex.hackathon.smart_prep.dto.response.AuthResponse;
@@ -17,6 +18,7 @@ import trex.hackathon.smart_prep.security.JwtTokenUtil;
 import java.time.LocalDateTime;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AuthService {
 
@@ -78,13 +80,13 @@ public class AuthService {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
 
 		user.setLastLogin(LocalDateTime.now());
-		userRepository.save(user);
+		User savedUser = userRepository.save(user);
 
 		// Generate token
-		String token = jwtTokenUtil.generateToken(user);
+		String token = jwtTokenUtil.generateToken(savedUser);
 
 		return AuthResponse.builder()
-				.user(UserDto.fromUser(user))
+				.user(UserDto.fromUser(savedUser))
 				.token(token)
 				.build();
 	}
