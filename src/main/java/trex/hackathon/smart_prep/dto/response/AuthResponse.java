@@ -25,6 +25,7 @@ public class AuthResponse {
 		private String email;
 		private String role;
 		private String profilePictureUrl;
+		private String bio;
 
 		public static UserDto fromUser(User user) {
 			return UserDto.builder()
@@ -34,6 +35,7 @@ public class AuthResponse {
 					.email(user.getEmail())
 					.role(user.getRole().name())
 					.profilePictureUrl(user.getProfilePictureUrl())
+					.bio(user.getBio())
 					.build();
 		}
 	}
