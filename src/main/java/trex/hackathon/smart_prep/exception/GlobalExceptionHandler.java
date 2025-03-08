@@ -56,6 +56,20 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
 	}
 
+	@ExceptionHandler(QuizAttemptNotFoundException.class)
+	public ResponseEntity<Map<String, String>> handleQuizAttemptNotFoundException(QuizAttemptNotFoundException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put("error", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors);
+	}
+
+	@ExceptionHandler(InvalidQuizActionException.class)
+	public ResponseEntity<Map<String, String>> handleInvalidQuizActionException(InvalidQuizActionException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put("error", ex.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+	}
+
 	@ExceptionHandler(QuestionValidationException.class)
 	public ResponseEntity<Map<String, String>> handleQuestionValidationException(QuestionValidationException ex) {
 		Map<String, String> errors = new HashMap<>();
