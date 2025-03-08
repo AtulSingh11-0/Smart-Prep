@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -49,6 +51,9 @@ public class QuestionPaper {
 
 	@Column(name = "passing_marks")
 	private Integer passingMarks;
+
+	@OneToMany(mappedBy = "questionPaper", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Question> questions = new ArrayList<>();
 
 	@Column(name = "is_published")
 	private boolean published;
