@@ -31,7 +31,7 @@ public class StudentAnswer {
 	@Column(name = "selected_option_index")
 	private Integer selectedOptionIndex;
 
-	@Column(name = "text_answer", columnDefinition = "LONGTEXT")
+	@Column(name = "text_answer", columnDefinition = "TEXT")
 	private String textAnswer;
 
 	@Column(name = "is_correct")
@@ -40,10 +40,10 @@ public class StudentAnswer {
 	@Column(name = "marks_awarded")
 	private Integer marksAwarded;
 
-	@Column(name = "ai_feedback", columnDefinition = "LONGTEXT")
+	@Column(name = "ai_feedback", columnDefinition = "TEXT")
 	private String aiFeedback;
 
-	@Column(name = "teacher_feedback", columnDefinition = "LONGTEXT")
+	@Column(name = "teacher_feedback", columnDefinition = "TEXT")
 	private String teacherFeedback;
 
 	@Column(name = "created_at")
