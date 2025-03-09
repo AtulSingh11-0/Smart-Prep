@@ -1,9 +1,6 @@
 package trex.hackathon.smart_prep.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import trex.hackathon.smart_prep.model.Question;
 import trex.hackathon.smart_prep.model.StudentAnswer;
 
@@ -22,13 +19,16 @@ public class StudentAnswerResponse {
 	private Integer marks;
 	private List<String> options;
 	private Integer selectedOptionIndex;
+	private Integer correctOption;
 	private String textAnswer;
+	private String correctAnswer;
 	private Boolean isCorrect;
 	private Integer marksAwarded;
 	private String aiFeedback;
 	private String teacherFeedback;
 
 	public static StudentAnswerResponse fromStudentAnswer(StudentAnswer answer, boolean includeCorrectAnswers) {
+
 		StudentAnswerResponseBuilder builder = StudentAnswerResponse.builder()
 				.id(answer.getId())
 				.questionId(answer.getQuestion().getId())
@@ -38,7 +38,9 @@ public class StudentAnswerResponse {
 				.marks(answer.getQuestion().getMarks())
 				.options(answer.getQuestion().getOptions())
 				.selectedOptionIndex(answer.getSelectedOptionIndex())
-				.textAnswer(answer.getTextAnswer());
+				.textAnswer(answer.getTextAnswer())
+				.correctOption(answer.getQuestion().getCorrectOptionIndex())
+				.correctAnswer(answer.getQuestion().getModelAnswer());
 
 		// Only include grading information if requested or attempt is completed
 		if (includeCorrectAnswers) {

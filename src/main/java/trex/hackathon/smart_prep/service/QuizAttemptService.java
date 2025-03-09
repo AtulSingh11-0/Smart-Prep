@@ -73,7 +73,7 @@ public class QuizAttemptService {
 			List<StudentAnswer> answers = studentAnswerRepository.findByQuizAttempt(attempt);
 
 			List<StudentAnswerResponse> answerResponses = answers.stream()
-					.map(answer -> StudentAnswerResponse.fromStudentAnswer(answer, false))
+					.map(answer -> StudentAnswerResponse.fromStudentAnswer(answer, true))
 					.toList();
 
 			return QuizAttemptResponse.fromQuizAttempt(attempt, true, answerResponses);
@@ -90,7 +90,7 @@ public class QuizAttemptService {
 		QuizAttempt savedAttempt = quizAttemptRepository.save(quizAttempt);
 
 		// Return the new attempt with no answers yet
-		return QuizAttemptResponse.fromQuizAttempt(savedAttempt, false, new ArrayList<>());
+		return QuizAttemptResponse.fromQuizAttempt(savedAttempt, true, new ArrayList<>());
 	}
 
 	public StudentAnswerResponse submitAnswer(Long attemptId, SubmitAnswerRequest request, User student) {
@@ -152,7 +152,7 @@ public class QuizAttemptService {
 		StudentAnswer savedAnswer = studentAnswerRepository.save(answer);
 
 		// Return the answer
-		return StudentAnswerResponse.fromStudentAnswer(savedAnswer, false);
+		return StudentAnswerResponse.fromStudentAnswer(savedAnswer, true);
 	}
 
 	public QuizAttemptResponse getQuizAttempt(Long attemptId, User student) {
@@ -320,7 +320,7 @@ public class QuizAttemptService {
 		return incompleteAttempts.stream().map(attempt -> {
 			List<StudentAnswer> answers = studentAnswerRepository.findByQuizAttempt(attempt);
 			List<StudentAnswerResponse> answerResponses = answers.stream()
-					.map(answer -> StudentAnswerResponse.fromStudentAnswer(answer, false))
+					.map(answer -> StudentAnswerResponse.fromStudentAnswer(answer, true))
 					.toList();
 
 			return QuizAttemptResponse.fromQuizAttempt(attempt, true, answerResponses);
